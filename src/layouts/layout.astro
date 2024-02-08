@@ -1,0 +1,19 @@
+---
+export interface Props {
+  title: string;
+  blackOn?: boolean;
+  gutter?: boolean;
+  disableAnimation?: boolean;
+  footerActive?: boolean;
+}
+
+const {
+  title = "Gymkhana",
+  blackOn = true,
+  gutter = true,
+  disableAnimation = true,
+  footerActive = true,
+}: Props = Astro.props;
+
+
+---
