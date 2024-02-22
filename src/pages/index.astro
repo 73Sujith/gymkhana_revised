@@ -1,16 +1,164 @@
 ---
-
+import Layout from "../layouts/layout.astro";
+import hero from "../images/hero.webp?url";
+import members from "../images/members-small.jpg?url";
+import Card from "../components/general/card.astro";
+import Loader from "../components/general/loader.tsx";
+import Events from "../components/landing_page/events.astro";
+// import Gallery from "../components/general/gallery";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  gutter={false}
+  title="Gymkhana IIT Hyderabad"
+  blackOn={false}
+  disableAnimation={false}
+>
+  <Loader client:load />
+  <section
+    class="h-[100vh] w-full relative landing overflow-hidden hostel-container"
+  >
+    <img
+      src={hero}
+      alt="IITH Hostels"
+      class="absolute object-cover -z-10 h-full hostel md:w-full"
+    />
+    <div
+      class="absolute bg-gradient-to-r from-[#00423ba6] to-[#190d57cf] z-10 w-full h-full bg-opacity-20"
+    >
+    </div>
+    <div
+      class="relative z-20 text-3xl text-white -translate-y-[50%] top-[50%] pl-4 lg:px-[4rem] heading"
+    >
+      <h2 class="relative z-20 font-semibold text-r lg:text-4xl xl:text-6xl">
+        IIT HYDERABAD
+      </h2>
+      <h2
+        class="relative z-20 text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-semibold lg:font-bold"
+      >
+        STUDENT GYMKHANA
+      </h2>
+    </div>
+  </section>
+  <section
+    class="lg:grid lg:grid-cols-2 lg:py-5 lg:px-[4rem] bg-white about-us relative z-10"
+  >
+    <h2 class="text-4xl p-5 font-[600] md:text-5xl md:p-7 lg:hidden">
+      About Us
+    </h2>
+    <div class="justify-self-center lg:p-6 lg:flex">
+      <img
+        src={members}
+        alt="gymkhana 2023"
+        class="lg:left lg:object-contain"
+      />
+    </div>
+    <div>
+      <h2 class="hidden lg:block lg:text-5xl font-bold p-7 pb-0">About Us</h2>
+      <p class="font-[400] p-5 lg:text-lg lg:pb-8 lg:pr-5">
+        Student Gymkhana IITH is the student body of IIT Hyderabad which aims to
+        bring the students together for their mutual all-round development. All
+        the members of the Student Gymkhana are bounded by the Student Gymkhana
+        Constitution and functions through its Executive Council, with the
+        guidance of fculty incharges. <br /><br />
+
+        These members manage all the activities in their respective areas with
+        the President coordinating them all. They are selected through the
+        general elections which are held at the end of each academic year. Each
+        domain has its own Council which helps the Secretaries in conducting
+        various activities throughout the year. Student Gymkhana is constituted
+        to foster a sense of unity among the students. It oversees all the
+        aspects of the students' life during their stay at IIT Hyderabad and is
+        constantly trying to improve their life here. It also acts as a link
+        between the administration and the students.
+      </p>
+    </div>
+  </section>
+  <section class="bg-p p-5 px-7 flex flex-col lg:py-[3rem]">
+    <div class="bg-r h-[6px] w-full self-center">
+      <div class="bg-g h-[6px] w-16 ml-16"></div>
+    </div>
+    <h2
+      class="text-black font-semibold text-4xl pt-3 lg:px-[4rem] lg:pt-[2rem] lg:text-5xl lg:font-bold"
+    >
+      Councils
+    </h2>
+    <div class="lg:grid lg:grid-cols-2 lg:px-[4rem] gap-10 lg:pt-4 py-8">
+      <Card
+        title="Cultural Council"
+        link="/councils/cultural"
+        desc={"The Cultural Council are a motivated group of individuals who believe that a college should have its equal share of fun & frolic along with the case studies. They attempt to capture the vibrant persona of the students by offering them a platform to showcase  th..."}
+      />
+      <Card
+        title="Media Council"
+        link="/councils/media"
+        desc={"The media council of IITH was formed on May 2014 and is a student council that helps in taking IITH to every individual in and outside IITH. We are involved in publicizing our institute though social media, social events, etc. Media Council is currently involved in var... "}
+      />
+      <Card
+        title="Sci-tech Council"
+        link="councils/scitech"
+        className="hidden lg:block"
+        desc={"The Sci-Tech council is headed by the Science and Technology Secretary. It encompasses nine societies : AeroClub (Aeronautics & Drone Design Club), Cepheid (Astronomy Club), Elektronica (Electronics & Signal Processing Club), Kludge (Information Securit..."}
+      />
+      <Card
+        title="General Council"
+        link="/councils/general"
+        className="hidden lg:block"
+        desc={"The General Council is an umbrella term for various bodies which not only perform representation tasks, but also cater to student welfare, societies, entertainments etc. The General Council is led by two General Secretaries. One shall be a girl student and another..."}
+      />
+    </div>
+    <a href="/councils/general" class="md:self-center"
+      ><button
+        class="text-white bg-r px-5 py-3 rounded-xl text-xl inline-block w-fit font-semibold mt-8"
+        >More Councils</button
+      >
+    </a>
+  </section>
+
+  <Events />
+
+  <script defer>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".heading", {
+      yPercent: 10,
+      scrollTrigger: {
+        trigger: ".about-us",
+        scrub: 3,
+      },
+    });
+    gsap.to([".hostel-container"], {
+      y: 300,
+      scrollTrigger: {
+        trigger: ".about-us",
+        scrub: true,
+        end: "+=500  center",
+      },
+    });
+  </script>
+</Layout>
+
+<style>
+  @keyframes bgMove {
+    0% {
+      object-position: 50% 50%;
+    }
+    25% {
+      object-position: 0% 50%;
+    }
+    50% {
+      object-position: 50% 50%;
+    }
+    50% {
+      object-position: 100% 50%;
+    }
+    100% {
+      object-position: 50% 50%;
+    }
+  }
+  .hostel {
+    animation: bgMove infinite 600s linear;
+  }
+  .text-shadow {
+    text-shadow: 0 0 8px black;
+  }
+</style>

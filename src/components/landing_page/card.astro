@@ -1,0 +1,36 @@
+---
+export interface Props {
+  logo?: string;
+  desc?: string;
+  eventName: string;
+  href: string;
+}
+const { logo, desc, eventName, href } = Astro.props;
+---
+
+<div
+  class="event-card md:w-[18.75rem] p-6 w-[17rem] min-h-[18.75rem] border-4 border-g bg-[rgba(217, 217, 217, 0.1)] rounded-[20px] text-white"
+>
+  <div class="flex flex-col items-center h-full">
+    <div class="event-content">
+      <img src={logo} alt="events logo" />
+    </div>
+    <div class="event-content relative top-6">
+      <h4 class="text-xl lg:text-[1.5rem] font-medium">{eventName}</h4>
+    </div>
+    <div class="event-content flex-grow">
+      <p class="text-[1rem] mt-8">
+        {desc}
+      </p>
+    </div>
+    <div
+      class="event-content flex justify-center mt-4 items-center relative bottom-0"
+    >
+      <a href={href}
+        ><button class="text-p bg-g px-4 py-2 rounded-lg font-semibold"
+          >Learn More</button
+        ></a
+      >
+    </div>
+  </div>
+</div>

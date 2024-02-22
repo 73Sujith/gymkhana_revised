@@ -1,0 +1,112 @@
+---
+import bgImage from "../../images/bg-events.jpg?url";
+import Card from "./card.astro";
+import ElanLogo from "../../images/elan.webp?url";
+import ZozimusLogo from "../../images/zozimus.png?url";
+import TedexLogo from "../../images/tedx.iithyderabad.jpg?url";
+---
+
+<section class="relative min-h-[90vh] event-section">
+  <div class="absolute object-cover -z-10 h-full w-full">
+    <img class="object-cover h-full w-full" src={bgImage} alt="crowd" />
+  </div>
+  <div
+    class="polygon h-full w-full bg-p bg-opacity-50s absolute top-0 left-0 z-[-5]"
+  >
+  </div>
+  <div class="px-5 py-5">
+    <div class="bg-r h-[6px] w-full self-center mb-6">
+      <div class="bg-g h-[6px] w-16 ml-16"></div>
+    </div>
+    <h2
+      class="text-white font-semibold text-4xl pt-3 lg:px-[4rem] lg:pt-[2rem] lg:text-5xl lg:font-semibold"
+    >
+      Events
+    </h2>
+    <div
+      class="card-container grid grid-cols-1 lg:grid-cols-3 justify-items-center md:mt-8 py-6 gap-9"
+    >
+      <Card
+        href={"/events/elan"}
+        logo={ElanLogo}
+        eventName={`Elan & nVision`}
+        desc="Elan & nVision is the annual techno cultural fest hosted by IIT Hyderabad, Elan represents the cultural part of the fest and nVision the technical part of the fest."
+      />
+      <Card
+        href={"/events/ted-talks"}
+        logo={TedexLogo}
+        eventName={`TedX`}
+        desc="TEDxIITHyderabad is an annual programme aimed at educating, inspiring and connecting great minds."
+      />
+      <Card
+        href={"/events/zozimus"}
+        logo={ZozimusLogo}
+        eventName="Zozimus"
+        desc="It’s the Litfest! Time for Merriment and Jollification. In the words of Roald Dahl, “A little magic can take you a long way.”"
+      />
+    </div>
+    <div class="relative translate-x-[-50%] left-[50%] inline-block py-6">
+      <a href="/events/e-summit"
+        ><button
+          class="text-white py-2 px-4 border-2 border-white rounded-lg hover:bg-white hover:text-p hover:font-semibold transition-all"
+        >
+          More Events
+        </button>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const mlg = window.matchMedia("(min-width: 1024px)");
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/all";
+  if (mlg.matches) {
+    //timeline approach
+    let tl = gsap.timeline();
+    tl.from(".event-card", {
+      border: "4px solid #07cebb00",
+      y: 20,
+      duration: 1,
+      stagger: 0.2,
+    });
+
+    tl.from(
+      ".event-card >*",
+      {
+        autoAlpha: 0,
+        stagger: 0.1,
+      },
+      "<"
+    );
+
+    ScrollTrigger.create({
+      trigger: ".event-card",
+      animation: tl,
+      start: "+=30 +=68%",
+      toggleActions: "restart none none reverse",
+    });
+  } else {
+    const cards = document.querySelectorAll(".event-card");
+    console.log;
+    for (let card of cards) {
+      gsap.from(card, {
+        y: 20,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "+=30 +=80%",
+        },
+      });
+    }
+  }
+</script>
+
+<style>
+  .polygon {
+    height: 100%;
+    clip-path: polygon(0 67%, 0 0, 100% 33%, 100% 100%);
+  }
+</style>
